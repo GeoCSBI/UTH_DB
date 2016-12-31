@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Booking</title>
+</head>
+
+<body>
+{%if empty_tables%}
+
+<h1><u>Available Tables</u></h1>
+<ul>
+
+	{%for tables in empty_tables%}
+		{%if tables.isBooked == False%}
+			<li>{{tables.id}} - {{tables.seats}}</li>
+		{%endif%}
+	{%endfor%}
+</ul>
+
+{%else%}
+<h1>NO AVAILABLE TABLE FOR BOOKING ATM!</h1>
+{%endif%}
+
+</body>
+</html>

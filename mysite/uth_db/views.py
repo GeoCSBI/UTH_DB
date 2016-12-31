@@ -3,7 +3,7 @@ from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
 from django.views import generic 
-from .models import Food, Table
+from .models import Food, Table, Booking
 
 def index(request):
 	
@@ -25,5 +25,16 @@ def emptyTables(request):
 		'empty_tables':empty_tables,
 	}
 	return render(request, 'uth_db/tables.html', context)
-	
+
+#TODO: Add userId
+def mybookings(request):
+
+	#change all with filter key=userId
+	mybookings = Booking.objects.all()
+	mytable = Table.objects.all()
+	context = {
+		'mybookings':mybookings
+		'mytable':mytable
+	}
+	return render(request, 'uth_db/mybookings.html', context)
 	

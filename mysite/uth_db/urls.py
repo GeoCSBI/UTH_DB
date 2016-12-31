@@ -13,4 +13,7 @@ urlpatterns = [
 
 	#uth_db/tables/
 	url(r'^tables/$', views.emptyTables, name='empyTables')
+	
+	#uth_db/tables/
+	url(r'^mybookings/$', views.mybookings, name='mybookings')
 	]
