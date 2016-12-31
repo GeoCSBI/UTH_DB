@@ -2,22 +2,28 @@ from __future__ import unicode_literals
 from django.db import models
 
 # Create your models here.
+class Booking(models.Model):
+
+	dateBooked = models.DateField(null=True)
+	timeBooked = models.TimeField(null=True)
+	
+
 class Table(models.Model):
 
 	seats = models.IntegerField(default=4 ,null=False)
 	isBooked = models.BooleanField(default=False, null=False)
-	dateBooked = models.DateField(null=True)
-	timeBooked = models.TimeField(null=True)
+	booking = models.ForeignKey(Booking, null=True)
 
 	def __str__(self):
 		return 'Tablbe id - {} : Seats - {}'.format(self.id, self.seats) 
 
 class Order(models.Model):
 
-	tableId = models.ForeignKey(Table, on_delete=models.CASCADE)
+	
 	
 	def __str__(self):
 		return self.id
+
 
 class Food(models.Model):
 

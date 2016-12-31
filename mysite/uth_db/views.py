@@ -3,7 +3,7 @@ from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
 from django.views import generic 
-from .models import Food
+from .models import Food, Table
 
 def index(request):
 	
@@ -15,9 +15,15 @@ def index(request):
 
 def detail(request, menu_id):
 
-	
 	menu = get_object_or_404(Menu, pk=menu_id)
 	return render(request, 'uth_db/details.html', {'menu':menu})
 
+def emptyTables(request):
+	
+	empty_tables = Table.objects.all()
+	context = {
+		'empty_tables':empty_tables,
+	}
+	return render(request, 'uth_db/tables.html', context)
 	
 	
