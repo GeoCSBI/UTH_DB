@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Booking</title>
-</head>
+{%extends 'uth_db/base.html'%}
+{%block title%}Booking{%endblock%}
 
+{%block body%}
 <body>
 {%if error_message%}
 	<p><STRONG>{{error_message}}</STRONG></p>
@@ -27,4 +25,5 @@
 {%endif%}
 
 </body>
-</html>
+
+{%endblock%}
