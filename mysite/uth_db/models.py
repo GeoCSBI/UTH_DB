@@ -8,7 +8,7 @@ class Tables(models.Model):
 	isBooked = models.BooleanField(default=False, null=False)
 
 	def __str__(self):
-		return self.id + ' - ' + self.seats 
+		return 'Tablbe id - {} : Seats - {}'.format(self.id, self.seats) 
 
 class Menu(models.Model):
 
