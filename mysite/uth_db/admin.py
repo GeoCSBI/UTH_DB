@@ -1,6 +1,7 @@
 from django.contrib import admin
-from .models import Menu, Tables
+from .models import Food, Table, Order
 # Register your models here.
 
-admin.site.register(Menu)
-admin.site.register(Tables)
+admin.site.register(Food)
+admin.site.register(Table)
+admin.site.register(Order)
