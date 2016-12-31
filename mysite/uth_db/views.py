@@ -8,11 +8,10 @@ from .models import Menu
 def index(request):
 	
 	menu_items = Menu.objects.all()
-	html = ''	
-	for item in menu_items:
-		url = '/uth_db/' + str(item.id) + '/'
-		html+= '<a href="'+ url + '">'+ item.foodName +'</a><br>'
-	return HttpResponse(html)
+	context = {
+		'menu_items':menu_items,
+	}
+	return render(request, 'uth_db/index.html', context)
 
 def detail(request, menu_id):
 
