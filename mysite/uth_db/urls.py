@@ -12,7 +12,7 @@ urlpatterns = [
 	url(r'^(?P<menu_id>[0-9]+)/$', views.detail, name="detail"),
 
 	#uth_db/tables/
-	url(r'^tables/$', views.emptyTables, name='empyTables')
+	url(r'^tables/$', views.emptyTables, name='empyTables'),
 	
 	#uth_db/tables/
 	url(r'^mybookings/$', views.mybookings, name='mybookings')

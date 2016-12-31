@@ -33,7 +33,7 @@ def mybookings(request):
 	mybookings = Booking.objects.all()
 	mytable = Table.objects.all()
 	context = {
-		'mybookings':mybookings
+		'mybookings':mybookings,
 		'mytable':mytable
 	}
 	return render(request, 'uth_db/mybookings.html', context)

@@ -5,6 +5,11 @@
 </head>
 
 <body>
+{%if error_message%}
+	<p><STRONG>{{error_message}}</STRONG></p>
+{%endif%}
+
+
 {%if empty_tables%}
 
 <h1><u>Available Tables</u></h1>
