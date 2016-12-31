@@ -1,7 +1,7 @@
 {%if menu_items%}
 <ul>
 	{%for item in menu_items%}
-	<li><a href="/uth_db/{{item.id}}">{{item.foodName}}</a></li>
+	<li><a href="{%url 'uth_db : details' item.id%}">{{item.foodName}}</a></li>
 	{%endfor%}
 </ul>
 {%else%}

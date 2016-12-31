@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.views import generic 
@@ -15,6 +15,12 @@ def index(request):
 
 def detail(request, menu_id):
 
-	return HttpResponse("<h2>Details for id: " + str(menu_id) + "</h2>")
+	try:
+		menu_item = Menu.objects.get(pk=menu_id)
+	except Menu.DoesNotExist:
+		raise Http404("Directory Not Found!")
+
+	return render(request, 'uth_db/details.html', {'menu_item':menu_item})
+
 	
 	
