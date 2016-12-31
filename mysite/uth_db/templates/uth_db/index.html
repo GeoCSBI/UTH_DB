@@ -1,9 +1,9 @@
 {%if menu_items%}
 <ul>
 	{%for item in menu_items%}
-	<li><a href="{%url 'uth_db : details' item.id%}">{{item.foodName}}</a></li>
+	<li><a href="{% url 'uth_db:detail' item.id%}">{{item.foodName}}</a></li>
 	{%endfor%}
 </ul>
 {%else%}
-	<h3>You don't jave any foods in the menu</h3>
+	<h3>You don't have any foods in the menu</h3>
 {%endif%}
