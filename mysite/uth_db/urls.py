@@ -11,5 +11,7 @@ urlpatterns = [
 
 	#uth_db/tables/
 	url(r'^tables/$', views.TablesView.as_view(), name='emptyTables'),
+
+	url(r'register/$', views.UserFormView.as_view(), name="register"),
 	
 	]
