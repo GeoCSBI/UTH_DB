@@ -6,14 +6,10 @@ app_name = 'uth_db'
 urlpatterns = [
 	
 	#/uth_db/
-	url(r'^$', views.index, name="index"),
+	url(r'^$', views.IndexView.as_view(), name="index"),
 	
-	#/uth_db/id/
-	url(r'^(?P<menu_id>[0-9]+)/$', views.detail, name="detail"),
 
 	#uth_db/tables/
-	url(r'^tables/$', views.emptyTables, name='emptyTables'),
+	url(r'^tables/$', views.TablesView.as_view(), name='emptyTables'),
 	
-	#uth_db/tables/
-	url(r'^mybookings/$', views.mybookings, name='mybookings')
 	]

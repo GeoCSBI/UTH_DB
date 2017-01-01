@@ -3,17 +3,17 @@
 
 {%block body%}
 <body>
-{%if error_message%}
+{%if object_list%}
 	<p><STRONG>{{error_message}}</STRONG></p>
 {%endif%}
 
 
-{%if empty_tables%}
+{%if object_list%}
 
 <h1><u>Available Tables</u></h1>
 <ul>
 
-	{%for tables in empty_tables%}
+	{%for tables in object_list%}
 		{%if tables.isBooked == False%}
 			<li>{{tables.id}} - {{tables.seats}}</li>
 		{%endif%}
