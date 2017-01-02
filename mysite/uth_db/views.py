@@ -42,11 +42,12 @@
 from django.views import generic
 from django.views.generic import View
 from .models import Food, Table
-from .forms import UserForm
+from .forms import UserForm, BookingForm
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login	
-
+from django.http import HttpResponseRedirect
 
 class IndexView(generic.ListView):
 
@@ -60,6 +61,51 @@ class TablesView(generic.ListView):
 	template_name = 'uth_db/tables.html'
 	def get_queryset(self):
 		return Table.objects.all()
+
+class BookingFormView(View):
+	form_class = BookingForm
+	template_name = 'uth_db/mybooking_form.html'
+
+	def get(self, request):
+		form = self.form_class(None)
+		return render(request, self.template_name, {'form':form})
+
+	#process form data
+	def post(self, request):
+		form = self.form_class(request.POST)
+
+		if form.is_valid():
+
+			booking = form.save(commit=False)
+
+			#cleaned (normalized) data
+			dateBooked = form.cleaned_data['dateBooked']
+			timeBooked = form.cleaned_data['timeBooked']
+			booking.bookedBy = User.objects.get(id=request.user.id)
+			persons = form.cleaned_data['persons']
+			
+			tables = Table.objects.all()
+
+			for table in tables:
+
+				print table.seats
+
+				if table.isBooked == False:
+					print 'hello'
+					table.isBooked = True
+					table.booking = booking.id
+					table.update()
+					break
+
+
+			booking.save()
+
+
+
+
+		return HttpResponseRedirect('/uth_db/')
+
+
 
 class UserFormView(View):
 
