@@ -47,12 +47,27 @@
 						Menu
 					</a>>
 				</li>
+				{%if request.user.is_authenticated == False%}
 				<li class="">
-					<a href="{%url 'uth_db:index'%}">
-					<span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;
-						Logout
-					</a>>
+					<a href="{%url 'uth_db:login'%}">
+					<span class="glyphicon glyphicon-on" aria-hidden="true"></span>&nbsp;
+					Login
+				</a>
 				</li>
+				<li class="">
+					<a href="{%url 'uth_db:register'%}">
+					<span class="glyphicon glyphicon-pen" aria-hidden="true"></span>&nbsp;
+					Register
+				</a>
+				</li>
+				{%else%}
+				<li class="">
+					<a href="{%url 'uth_db:logout'%}">
+						<span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;
+							Logout
+					</a>
+				</li>
+				{%endif%}
 			</ul>
 		</div>
 
