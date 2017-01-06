@@ -18,10 +18,16 @@ class Table(models.Model):
 
 	seats = models.IntegerField(default=4 ,null=False)
 	isBooked = models.BooleanField(default=False, null=False)
-	booking = models.ForeignKey(Booking, null=True)
+	booking = models.ForeignKey(Booking, null=True, blank=True, on_delete=models.SET_NULL)
 
 	def __str__(self):
 		return 'Tablbe id - {} : Seats - {} : IsBooked - {}'.format(self.id, self.seats, self.isBooked) 
+
+	def setFree(self):
+
+		if self.booking == models.null:
+			self.isBooked = False
+
 
 class Order(models.Model):
 
@@ -35,6 +41,7 @@ class Food(models.Model):
 
 	foodName = models.CharField(max_length=40, null=False)
 	foodCost = models.IntegerField(default=5,null=False)
+	quantity = models.IntegerField(null=False, default=0)
 
 	def __str__(self):
 		return self.foodName

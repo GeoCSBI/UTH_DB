@@ -85,6 +85,7 @@ class BookingFormView(View):
 			persons = form.cleaned_data['persons']
 			
 			tables = Table.objects.all()
+			booking.save()
 
 			for table in tables:
 
@@ -93,12 +94,18 @@ class BookingFormView(View):
 				if table.isBooked == False:
 					print 'hello'
 					table.isBooked = True
-					table.booking = booking.id
-					table.update()
+					table.booking = booking
+					table.save()
 					break
+			
 
 
-			booking.save()
+		else:
+
+			print form.errors
+
+
+			
 
 
 
