@@ -77,6 +77,7 @@ class BookingFormView(View):
 		if form.is_valid():
 
 			booking = form.save(commit=False)
+			available = False
 
 			#cleaned (normalized) data
 			dateBooked = form.cleaned_data['dateBooked']
@@ -91,25 +92,38 @@ class BookingFormView(View):
 
 				print table.seats
 
-				if table.isBooked == False:
+				if (table.isBooked == False) & (table.seats >= persons):
 					print 'hello'
+					available = True
 					table.isBooked = True
 					table.booking = booking
 					table.save()
 					break
 			
+			if available == False:
+
+				temp = 0
+				tempTables = []
+				for table in tables:
+
+					if table.isBooked == False:
+						
+						temp += table.seats
+						tempTables.append(table)
+						
+						if temp >= persons:
+							for item in tempTables:
+								item.isBooked = True
+								item.booking = booking
+								item.save()
+							break
 
 
 		else:
 
 			print form.errors
 
-
-			
-
-
-
-
+		
 		return HttpResponseRedirect('/uth_db/')
 
 
