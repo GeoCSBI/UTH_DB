@@ -17,8 +17,12 @@ urlpatterns = [
 	#uth_db/tables/
 	url(r'^tables/$', views.TablesView.as_view(), name='emptyTables'),
 
-	url(r'register/$', views.UserFormView.as_view(), name="register"),
+	url(r'^register/$', views.UserFormView.as_view(), name="register"),
 	
-	url(r'booking/$', views.BookingFormView.as_view(), name="booking")
+	url(r'^booking/$', views.BookingFormView.as_view(), name="booking"),
 
+	url(r'^not_available/$', views.noBooking, name="failed"),
+
+	url(r'^order/$', views.OrderFormView.as_view(), name="order")
+	
 	]

@@ -42,12 +42,15 @@
 from django.views import generic
 from django.views.generic import View
 from .models import Food, Table
-from .forms import UserForm, BookingForm
+from .forms import UserForm, BookingForm, OrderForm
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login	
 from django.http import HttpResponseRedirect
+
+def noBooking(request):
+	return render(request, 'uth_db/tables.html', {})
 
 class IndexView(generic.ListView):
 
@@ -117,7 +120,9 @@ class BookingFormView(View):
 								item.booking = booking
 								item.save()
 							break
-
+			if available == False:
+				booking.delete()
+				return HttpResponseRedirect('/uth_db/not_available')
 
 		else:
 
@@ -126,6 +131,33 @@ class BookingFormView(View):
 		
 		return HttpResponseRedirect('/uth_db/')
 
+
+
+class OrderFormView(View):
+
+	form_class = OrderForm
+	template_name = 'uth_db/order.html'
+
+	#COOLEST THING ABOUT CLASS BASED VIEW!!
+	#handling both GET and POST req through the same URL
+
+	#display blank form
+	def get(self, request):
+		form = self.form_class(None)
+		return render(request, self.template_name, {'form':form})
+
+	#process form data
+	def post(self, request):
+		form = self.form_class(request.POST)
+
+		if form.is_valid():
+
+			order = form.save(commit=False)
+
+			#cleaned (normalized) data
+			order.save()
+
+		return render(request, self.template_name, {'form':form})
 
 
 class UserFormView(View):

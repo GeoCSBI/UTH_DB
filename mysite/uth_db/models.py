@@ -25,16 +25,9 @@ class Table(models.Model):
 
 	def setFree(self):
 
-		if self.booking == models.null:
+		if self.booking == Field.null:
 			self.isBooked = False
-
-
-class Order(models.Model):
-
-	tableOrdered = models.ForeignKey(Table, default=0)
-	
-	def __str__(self):
-		return self.id
+			self.booking.update()
 
 
 class Food(models.Model):
@@ -45,6 +38,17 @@ class Food(models.Model):
 
 	def __str__(self):
 		return self.foodName
+
+
+class Order(models.Model):
+
+	tableOrdered = models.ForeignKey(Table, default=0)
+	orderedBy = models.ForeignKey(User, null=False, default=0)
+	booking = models.ForeignKey(Booking, null=True, blank=True)
+	foodOrdered = models.ManyToManyField(Food) 
+
+	def __str__(self):
+		return 'Ordered By : {} | Table : {}'.format(self.orderedBy, self.tableOrdered)
 
 class FoodOrdered(models.Model):
 
